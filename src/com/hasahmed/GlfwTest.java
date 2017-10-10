@@ -1,4 +1,4 @@
-/**
+package com.hasahmed; /**
  * Created by Hasan Y Ahmed on 10/7/17.
  */
 import org.lwjgl.glfw.*;
@@ -7,7 +7,6 @@ import org.lwjgl.opengl.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.opengl.GL11.*;
-import org.lwjgl.opengl.GL21.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class GlfwTest {

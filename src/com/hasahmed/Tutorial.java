@@ -1,53 +1,35 @@
-/**
+package com.hasahmed; /**
  * Created by Hasan Y Ahmed on 10/7/17.
  */
 
-import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
-import java.io.IOException;
 import java.nio.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
-import org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-public class HelloWorld {
+public class Tutorial {
 
-    static String readFile(String path, Charset encoding){
-        Path currentDir = Paths.get("shaders");
-        currentDir = currentDir.toAbsolutePath();
-        Path p = Paths.get(currentDir.toString(), path);
-        try {
-            byte[] encoded = Files.readAllBytes(p);
-            return new String(encoded, encoding);
-        } catch (IOException e){
-            System.out.println("Something went wrong with the reading of the shader: " + e.getMessage());
-        }
-        return null;
-    }
-
-    float verts[] = {
-                0f, 0f, 0f,
-                -1f, -1, 0f,
-                1f, 1f, 0f
-    };
 
     // The window handle
     private long window;
 
-    public void run() {
-        init();
-        loop();
+    private int progHandle; //the handle to the shader program
 
+
+    private float verts[] = {
+            -1f, -1f, 0f,
+            1f, -1f, 0f,
+            0f, 1f, 0f
+    };
+
+
+    private void teardown(){
         // Free the window callbacks and destroy the window
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
@@ -57,20 +39,11 @@ public class HelloWorld {
         glfwSetErrorCallback(null).free();
     }
 
+    public void run() {
+        init();
+        loop();
+        teardown();
 
-    private int[] readinShaders(){
-        String fragmentShaderBuffer = readFile("test.frag", Charset.defaultCharset());
-        String vertexShaderBuffer = readFile("test.vert", Charset.defaultCharset());
-        int fragShader = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
-        int vertShader = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
-        if (fragmentShaderBuffer != null && vertexShaderBuffer != null){
-            GL20.glShaderSource(fragShader, fragmentShaderBuffer);
-            GL20.glShaderSource(vertShader, vertexShaderBuffer);
-        } else{
-            System.out.println("Something went wrong with the reading in of the shaders");
-        }
-        int[] shaderArr = {fragShader, vertShader};
-        return shaderArr;
     }
 
     private void init() {
@@ -84,7 +57,7 @@ public class HelloWorld {
 
         // Configure GLFW
         glfwDefaultWindowHints(); // optional, the current window hints are already the default
-        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
+        glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE); // the window will stay hidden after creation
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will not be resizable
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -125,12 +98,68 @@ public class HelloWorld {
                     (vidmode.height() - pHeight.get(0)) / 2
             );
         } // the stack frame is popped automatically
+
+
+
+
         // Make the OpenGL context current
         glfwMakeContextCurrent(window);
         // Enable v-sync
         glfwSwapInterval(1);
         // Make the window visible
         glfwShowWindow(window);
+
+
+        //initialize open GL, and prepare for triangle
+
+        GL.createCapabilities();
+        GL11.glClearColor(0f, 0f, 1f, 0f);
+
+        String[] shaderBufferArr = GLUtil.readinShaders("test.frag", "test.vert");
+
+        int fragShaderID = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
+        int vertShaderID = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
+        GL20.glShaderSource(fragShaderID, shaderBufferArr[0]);
+        GL20.glShaderSource(vertShaderID, shaderBufferArr[1]);
+
+
+        System.out.println("Compiling Frag Shader...");
+        GL20.glCompileShader(fragShaderID);
+        //String fragLog = GL20.glGetShaderInfoLog(fragShader);
+//        System.out.println(fragLog);
+
+        System.out.println("Compiling Vert Shader...");
+        GL20.glCompileShader(vertShaderID);
+        //String vertLog = GL20.glGetShaderInfoLog(vertShader);
+//        System.out.println(vertLog);
+
+        System.out.println("Creating Program...");
+        progHandle = GL20.glCreateProgram();
+        System.out.println("Attatching Shaders to Program... " + fragShaderID);
+        GL20.glAttachShader(progHandle, fragShaderID);
+        System.out.println("Attatching Shaders to Program... " + vertShaderID);
+        GL20.glAttachShader(progHandle, vertShaderID);
+        System.out.println("Linking Program...");
+        GL20.glLinkProgram(progHandle);
+        String log = GL20.glGetProgramInfoLog(progHandle);
+        System.out.println(log);
+
+
+        //the buffer for the actual array of vertices
+        System.out.println("Generating Buffer...");
+        int buffer = GL15.glGenBuffers();
+
+        System.out.println("Binding Buffer...");
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, buffer);
+        System.out.println("Buffering Data...");
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verts, GL15.GL_STATIC_DRAW);
+
+
+        GL20.glEnableVertexAttribArray(0);
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, buffer);
+        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0l);
+
+
 
 
     }
@@ -141,30 +170,11 @@ public class HelloWorld {
         // LWJGL detects the context that is current in the current thread,
         // creates the GLCapabilities instance and makes the OpenGL
         // bindings available for use.
-        GL.createCapabilities();
-        GL11.glClearColor(0f, 0f, 1f, 0f);
 
-        int[] shaderArr = readinShaders();
-        int fragShader = shaderArr[0];
-        int vertShader = shaderArr[1];
+        //float temp[] = new float[9];
+        //GL15.glGetBufferSubData(GL15.GL_ARRAY_BUFFER, 0, temp);
+        //System.out.println(java.util.Arrays.toString(temp));
 
-
-        GL20.glCompileShader(fragShader);
-        GL20.glCompileShader(vertShader);
-
-        int progHandle = GL20.glCreateProgram();
-        GL20.glAttachShader(progHandle, fragShader);
-        GL20.glAttachShader(progHandle, vertShader);
-        GL20.glLinkProgram(progHandle);
-        GL20.glUseProgram(progHandle);
-
-
-        int buffer = GL15.glGenBuffers();
-
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, buffer);
-        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verts, GL15.GL_STATIC_DRAW);
-        GL20.glEnableVertexAttribArray(0);
-        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0l);
 
 
         // Run the rendering loop until the user has attempted to close
@@ -172,8 +182,14 @@ public class HelloWorld {
         while ( !glfwWindowShouldClose(window) ) {
             glfwPollEvents();
 
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+            //System.out.println("Using Program...");
+            GL20.glUseProgram(progHandle);
+
+
+
             GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, 3);
+            GL20.glDisableVertexAttribArray(0);
 
             glfwSwapBuffers(window);
 
@@ -181,7 +197,7 @@ public class HelloWorld {
     }
 
     public static void main(String[] args) {
-        new HelloWorld().run();
+        new Tutorial().run();
     }
 
 }
