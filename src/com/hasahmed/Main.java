@@ -18,13 +18,25 @@ public class Main {
 
     private long window; //window handle
     private int progHandle; //the handle to the shader program
-    private int vertexBuffer;
+    private int squareVertexBuffer;
+    private int triangleVertexBuffer;
 
 
-    private float verts[] = {
-            -0.5f, -0.5f, 0f,
+    private float triangleVerts[] = {
+            0f, 0.5f, 0f, //lower left,
+            1f, 0.5f, 0f, //lower right
+            0f, 1f, 0f // top
+    };
+
+    private float squareVerts[] = {
+            -0.5f, -0.5f, 0f, //lower left,
+            0.5f, -0.5f, 0f, //lower right
+            -0.5f, 0.5f, 0f, // top
+
+            -0.5f, 0.5f, 0f, //upper left
             0.5f, -0.5f, 0f,
-            0f, 0.5f, 0f
+            0.5f, 0.5f, 0f
+
     };
 
 
@@ -121,10 +133,16 @@ public class Main {
         GL30.glBindVertexArray(vertextArrayID);
 
 
-        //DRAWING OUR TRIANGLE
-        vertexBuffer = GL15.glGenBuffers();
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vertexBuffer);
-        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verts, GL15.GL_STATIC_DRAW);
+        //loading square into buffer
+        squareVertexBuffer = GL15.glGenBuffers();
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, squareVertexBuffer);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, squareVerts, GL15.GL_STATIC_DRAW);
+
+
+        // loading triangle into buffer
+        triangleVertexBuffer = GL15.glGenBuffers();
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, triangleVertexBuffer);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, triangleVerts, GL15.GL_STATIC_DRAW);
 
 
 
@@ -159,12 +177,24 @@ public class Main {
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
             GL20.glUseProgram(progHandle);
 
+            //square attribute array creation
             GL20.glEnableVertexAttribArray(0);
-            GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vertexBuffer);
-
+            GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, squareVertexBuffer);
             GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
-            GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, 3); //breaks because no shaders
+
+
+            //triangle attribute array creation
+            GL20.glEnableVertexAttribArray(1);
+            GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, triangleVertexBuffer);
+            GL20.glVertexAttribPointer(1, 3, GL11.GL_FLOAT, false, 0, 0);
+
+
+
+            GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, squareVerts.length / 3);
+            GL11.glDrawArrays(GL11.GL_TRIANGLES, 1, triangleVerts.length / 3);
+
             GL20.glDisableVertexAttribArray(0);
+            GL20.glDisableVertexAttribArray(1);
             glfwSwapBuffers(window);
         }
     }
