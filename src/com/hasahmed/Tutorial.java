@@ -112,7 +112,7 @@ public class Tutorial {
 
         //call first
         GL.createCapabilities();
-        GL11.glClearColor(0f, 0f, 1f, 0f);
+        GL11.glClearColor(0f, 1f, 1f, 1f);
 
 
         //THE VAO
@@ -164,6 +164,7 @@ public class Tutorial {
             GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
             GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, 3); //breaks because no shaders
             GL20.glDisableVertexAttribArray(0);
+            glfwSwapBuffers(window);
         }
     }
 
