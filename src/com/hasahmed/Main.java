@@ -13,7 +13,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-public class Tutorial {
+public class Main {
 
 
     private long window; //window handle
@@ -169,7 +169,7 @@ public class Tutorial {
     }
 
     public static void main(String[] args) {
-        new Tutorial().run();
+        new Main().run();
     }
 
 }
