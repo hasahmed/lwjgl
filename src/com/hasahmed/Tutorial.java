@@ -3,8 +3,8 @@ package com.hasahmed; /**
  */
 
 import org.lwjgl.glfw.*;
-import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
+import org.lwjgl.opengl.*;
 
 import java.nio.*;
 
@@ -16,10 +16,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class Tutorial {
 
 
-    // The window handle
-    private long window;
-
+    private long window; //window handle
     private int progHandle; //the handle to the shader program
+    private int vertexBuffer;
 
 
     private float verts[] = {
@@ -40,13 +39,14 @@ public class Tutorial {
     }
 
     public void run() {
+        createWindow();
         init();
         loop();
         teardown();
 
     }
 
-    private void init() {
+    private void createWindow(){
         // Setup an error callback. The default implementation
         // will print the error message in System.err.
         GLFWErrorCallback.createPrint(System.err).set();
@@ -57,11 +57,12 @@ public class Tutorial {
 
         // Configure GLFW
         glfwDefaultWindowHints(); // optional, the current window hints are already the default
+        glfwWindowHint(GLFW_SAMPLES, 4); // the window will stay hidden after creation
         glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE); // the window will stay hidden after creation
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will not be resizable
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL11.GL_TRUE);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -99,100 +100,70 @@ public class Tutorial {
             );
         } // the stack frame is popped automatically
 
-
-
-
         // Make the OpenGL context current
         glfwMakeContextCurrent(window);
         // Enable v-sync
         glfwSwapInterval(1);
         // Make the window visible
         glfwShowWindow(window);
+    }
 
+    private void init() {
 
-        //initialize open GL, and prepare for triangle
-
+        //call first
         GL.createCapabilities();
         GL11.glClearColor(0f, 0f, 1f, 0f);
 
-        String[] shaderBufferArr = GLUtil.readinShaders("test.frag", "test.vert");
 
-        int fragShaderID = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
-        int vertShaderID = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
-        GL20.glShaderSource(fragShaderID, shaderBufferArr[0]);
-        GL20.glShaderSource(vertShaderID, shaderBufferArr[1]);
+        //THE VAO
+        int vertextArrayID = GL30.glGenVertexArrays();
+        GL30.glBindVertexArray(vertextArrayID);
 
 
-        System.out.println("Compiling Frag Shader...");
-        GL20.glCompileShader(fragShaderID);
-        //String fragLog = GL20.glGetShaderInfoLog(fragShader);
-//        System.out.println(fragLog);
-
-        System.out.println("Compiling Vert Shader...");
-        GL20.glCompileShader(vertShaderID);
-        //String vertLog = GL20.glGetShaderInfoLog(vertShader);
-//        System.out.println(vertLog);
-
-        System.out.println("Creating Program...");
-        progHandle = GL20.glCreateProgram();
-        System.out.println("Attatching Shaders to Program... " + fragShaderID);
-        GL20.glAttachShader(progHandle, fragShaderID);
-        System.out.println("Attatching Shaders to Program... " + vertShaderID);
-        GL20.glAttachShader(progHandle, vertShaderID);
-        System.out.println("Linking Program...");
-        GL20.glLinkProgram(progHandle);
-        String log = GL20.glGetProgramInfoLog(progHandle);
-        System.out.println(log);
-
-
-        //the buffer for the actual array of vertices
-        System.out.println("Generating Buffer...");
-        int buffer = GL15.glGenBuffers();
-
-        System.out.println("Binding Buffer...");
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, buffer);
-        System.out.println("Buffering Data...");
+        //DRAWING OUR TRIANGLE
+        vertexBuffer = GL15.glGenBuffers();
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vertexBuffer);
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verts, GL15.GL_STATIC_DRAW);
 
 
-        GL20.glEnableVertexAttribArray(0);
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, buffer);
-        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0l);
 
 
+        //<<<<<<<<<<<<SHADERS>>>>>>>>>>>>>>
+        String[] shaderBufferArr = GLUtil.readinShaders("test.frag", "test.vert"); //read shaders into string array
+        int vertShaderID = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
+        int fragShaderID = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
+        GL20.glShaderSource(fragShaderID, shaderBufferArr[0]);
+        GL20.glShaderSource(vertShaderID, shaderBufferArr[1]);
+
+        GL20.glCompileShader(fragShaderID);
+        GL20.glCompileShader(vertShaderID);
 
 
+        progHandle = GL20.glCreateProgram();
+        GL20.glAttachShader(progHandle, fragShaderID);
+        GL20.glAttachShader(progHandle, vertShaderID);
+        GL20.glLinkProgram(progHandle);
+
+        GL20.glDetachShader(progHandle, vertShaderID);
+        GL20.glDetachShader(progHandle, fragShaderID);
+
+
+        GL20.glDeleteShader(vertShaderID);
+        GL20.glDeleteShader(fragShaderID);
     }
 
     private void loop() {
-        // This line is critical for LWJGL's interoperation with GLFW's
-        // OpenGL context, or any context that is managed externally.
-        // LWJGL detects the context that is current in the current thread,
-        // creates the GLCapabilities instance and makes the OpenGL
-        // bindings available for use.
-
-        //float temp[] = new float[9];
-        //GL15.glGetBufferSubData(GL15.GL_ARRAY_BUFFER, 0, temp);
-        //System.out.println(java.util.Arrays.toString(temp));
-
-
-
-        // Run the rendering loop until the user has attempted to close
-        // the window or has pressed the ESCAPE key.
         while ( !glfwWindowShouldClose(window) ) {
-            glfwPollEvents();
-
+            glfwPollEvents(); //for key handling
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-            //System.out.println("Using Program...");
             GL20.glUseProgram(progHandle);
 
+            GL20.glEnableVertexAttribArray(0);
+            GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vertexBuffer);
 
-
-            GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, 3);
+            GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+            GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, 3); //breaks because no shaders
             GL20.glDisableVertexAttribArray(0);
-
-            glfwSwapBuffers(window);
-
         }
     }
 

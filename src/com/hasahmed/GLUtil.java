@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.IOException;
-import org.lwjgl.opengl.*;
 
 public class GLUtil {
 
@@ -26,9 +25,7 @@ public class GLUtil {
         return null;
     }
     static String[] readinShaders(String fragShader, String vertShader) {
-        System.out.println("Reading in Frag Shader...");
         String fragmentShaderBuffer = readFile(fragShader, Charset.defaultCharset());
-        System.out.println("Reading in Vert Shader...");
         String vertexShaderBuffer = readFile(vertShader, Charset.defaultCharset());
 
         if (fragmentShaderBuffer != null && vertexShaderBuffer != null) {
