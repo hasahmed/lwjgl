@@ -132,6 +132,10 @@ public class Main {
         int vertextArrayID = GL30.glGenVertexArrays();
         GL30.glBindVertexArray(vertextArrayID);
 
+        int[] vertexArrayIDs = new int[4];
+        GL30.glGenVertexArrays(vertexArrayIDs);
+        System.out.println(java.util.Arrays.toString(vertexArrayIDs));
+
 
         //loading square into buffer
         squareVertexBuffer = GL15.glGenBuffers();
