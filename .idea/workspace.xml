@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a171044b-1487-486d-92f4-06fa62bea95c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/lwjgl-test/com/hasahmed/Main.class" afterPath="$PROJECT_DIR$/out/production/lwjgl-test/com/hasahmed/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shaders/test.frag" afterPath="$PROJECT_DIR$/shaders/test.frag" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/hasahmed/GLUtil.java" afterPath="$PROJECT_DIR$/src/com/hasahmed/GLUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/hasahmed/Main.java" afterPath="$PROJECT_DIR$/src/com/hasahmed/Main.java" />
     </list>
     <ignored path="lwjgl-test.iws" />
@@ -49,8 +49,8 @@
       <file leaf-file-name="GLUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/hasahmed/GLUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+            <state relative-caret-position="397">
+              <caret line="92" column="34" selection-start-line="92" selection-start-column="34" selection-end-line="92" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -59,13 +59,16 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/hasahmed/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="150" column="50" selection-start-line="150" selection-start-column="50" selection-end-line="150" selection-end-column="50" />
+            <state relative-caret-position="489">
+              <caret line="221" column="46" selection-start-line="221" selection-start-column="46" selection-end-line="221" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1246#1247#0" expanded="true" />
+                <element signature="e#1283#1284#0" expanded="true" />
+                <element signature="e#1309#1310#0" expanded="true" />
+                <element signature="e#1347#1348#0" expanded="true" />
                 <element signature="method#teardown#0;class#Main#0" expanded="false" />
                 <element signature="method#run#0;class#Main#0" expanded="false" />
-                <element signature="method#createWindow#0;class#Main#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -97,10 +100,10 @@
         <option value="$PROJECT_DIR$/src/HelloWorld.java" />
         <option value="$PROJECT_DIR$/src/Tutorial.java" />
         <option value="$PROJECT_DIR$/src/com/hasahmed/HelloWorld.java" />
-        <option value="$PROJECT_DIR$/src/com/hasahmed/GLUtil.java" />
         <option value="$PROJECT_DIR$/shaders/test.vert" />
         <option value="$PROJECT_DIR$/src/com/hasahmed/Tutorial.java" />
         <option value="$PROJECT_DIR$/shaders/test.frag" />
+        <option value="$PROJECT_DIR$/src/com/hasahmed/GLUtil.java" />
         <option value="$PROJECT_DIR$/src/com/hasahmed/Main.java" />
       </list>
     </option>
@@ -551,9 +554,12 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1246#1247#0" expanded="true" />
+            <element signature="e#1283#1284#0" expanded="true" />
+            <element signature="e#1309#1310#0" expanded="true" />
+            <element signature="e#1347#1348#0" expanded="true" />
             <element signature="method#teardown#0;class#Main#0" expanded="false" />
             <element signature="method#run#0;class#Main#0" expanded="false" />
-            <element signature="method#createWindow#0;class#Main#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -588,9 +594,12 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1246#1247#0" expanded="true" />
+            <element signature="e#1283#1284#0" expanded="true" />
+            <element signature="e#1309#1310#0" expanded="true" />
+            <element signature="e#1347#1348#0" expanded="true" />
             <element signature="method#teardown#0;class#Main#0" expanded="false" />
             <element signature="method#run#0;class#Main#0" expanded="false" />
-            <element signature="method#createWindow#0;class#Main#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -638,22 +647,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hasahmed/GlfwTest.java" />
     <entry file="file://$PROJECT_DIR$/out/production/lwjgl-test/GlfwTest.class" />
-    <entry file="file://$PROJECT_DIR$/src/com/hasahmed/GLUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shaders/test.vert">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hasahmed/HelloWorld.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="472">
@@ -675,15 +668,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/shaders/test.vert">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hasahmed/GLUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="92" column="34" selection-start-line="92" selection-start-column="34" selection-end-line="92" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hasahmed/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="150" column="50" selection-start-line="150" selection-start-column="50" selection-end-line="150" selection-end-column="50" />
+        <state relative-caret-position="489">
+          <caret line="221" column="46" selection-start-line="221" selection-start-column="46" selection-end-line="221" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1246#1247#0" expanded="true" />
+            <element signature="e#1283#1284#0" expanded="true" />
+            <element signature="e#1309#1310#0" expanded="true" />
+            <element signature="e#1347#1348#0" expanded="true" />
             <element signature="method#teardown#0;class#Main#0" expanded="false" />
             <element signature="method#run#0;class#Main#0" expanded="false" />
-            <element signature="method#createWindow#0;class#Main#0" expanded="false" />
           </folding>
         </state>
       </provider>

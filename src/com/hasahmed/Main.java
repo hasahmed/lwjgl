@@ -6,8 +6,6 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.system.*;
 import org.lwjgl.opengl.*;
 
-import org.joml.*;
-
 import java.nio.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
@@ -23,24 +21,39 @@ public class Main {
     private int squareVertexBuffer;
     private int triangleVertexBuffer;
 
+    private final int viewWidth = 800;
+    private final int viewHeight = 600;
+
 
     private float triangleVerts[] = {
             0f, 0.5f, 0f, //lower left,
             1f, 0.5f, 0f, //lower right
             0f, 1f, 0f // top
     };
-    private Matrix3d m;
 
     private float squareVerts[] = {
             -0.5f, -0.5f, 0f, //lower left,
             0.5f, -0.5f, 0f, //lower right
-            -0.5f, 0.5f, 0f, // top
+            -0.5f, 0.5f, 0f, // top left
 
-            -0.5f, 0.5f, 0f, //upper left
+            -0.5f, 0.5f, 0f, //top left
             0.5f, -0.5f, 0f, //lower right
-            0.5f, 0.5f, 0f //top
+            0.5f, 0.5f, 0f, //top
+
+            //triangle starts here
+//            0f, 0.5f, 0f, //lower left,
+//            1f, 0.5f, 0f, //lower right
+//            0f, 1f, 0f, // top
 
     };
+
+    int getViewWidth(){
+        return this.viewWidth;
+    }
+
+    int getViewHeight(){
+        return this.viewHeight;
+    }
 
 
     private void teardown(){
@@ -62,6 +75,9 @@ public class Main {
     }
 
     private void createWindow(){
+
+        squareVerts = GLUtil.makeSquare(10, 10, 200);
+        System.out.println(java.util.Arrays.toString(squareVerts));
         // Setup an error callback. The default implementation
         // will print the error message in System.err.
         GLFWErrorCallback.createPrint(System.err).set();
@@ -72,7 +88,7 @@ public class Main {
 
         // Configure GLFW
         glfwDefaultWindowHints(); // optional, the current window hints are already the default
-        glfwWindowHint(GLFW_SAMPLES, 4); // the window will stay hidden after creation
+        glfwWindowHint(GLFW_SAMPLES, 4); //antialiasing
         glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE); // the window will stay hidden after creation
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
 //        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will not be resizable
@@ -83,7 +99,7 @@ public class Main {
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         // Create the window
-        window = glfwCreateWindow(800, 600, "Hello World!", NULL, NULL);
+        window = glfwCreateWindow(viewWidth, viewHeight, "Hello World!", NULL, NULL);
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -126,6 +142,11 @@ public class Main {
 
     private void init() {
 
+
+//        squareVerts = GLUtil.arrayAppend(squareVerts, GLUtil.makeCircle(0.5f, 0.5f, 0.3f, 20));
+//        System.out.println(java.util.Arrays.toString(squareVerts));
+//        squareVerts =  GLUtil.makeCircle(0.5f, 0.5f, 0.3f, 4);
+
         //call first
         GL.createCapabilities();
         GL11.glClearColor(0f, 1f, 1f, 1f);
@@ -143,14 +164,10 @@ public class Main {
 
         //loading square into buffer
         squareVertexBuffer = GL15.glGenBuffers();
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, squareVertexBuffer);
-        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, squareVerts, GL15.GL_STATIC_DRAW);
 
 
         // loading triangle into buffer
-//        triangleVertexBuffer = GL15.glGenBuffers();
-//        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, triangleVertexBuffer);
-//        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, triangleVerts, GL15.GL_STATIC_DRAW);
+        triangleVertexBuffer = GL15.glGenBuffers();
 
 
 
@@ -179,29 +196,30 @@ public class Main {
         GL20.glDeleteShader(fragShaderID);
     }
 
+
     private void loop() {
         while ( !glfwWindowShouldClose(window) ) {
             glfwPollEvents(); //for key handling
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
             GL20.glUseProgram(progHandle);
 
+
+            GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, squareVertexBuffer);
+            GL15.glBufferData(GL15.GL_ARRAY_BUFFER, squareVerts, GL15.GL_STATIC_DRAW);
+
             //square attribute array creation
             GL20.glEnableVertexAttribArray(0);
             GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
 
-
-            //triangle attribute array creation
-            GL20.glEnableVertexAttribArray(1);
-            GL20.glVertexAttribPointer(1, 3, GL11.GL_FLOAT, false, 0, 0);
-
-
-
             GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, squareVerts.length / 3);
-//            GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, triangleVerts.length / 3);
 
             GL20.glDisableVertexAttribArray(0);
-            GL20.glDisableVertexAttribArray(1);
+
+
+
             glfwSwapBuffers(window);
+
+            GLUtil.translate(squareVerts, 10, -10);
         }
     }
 
