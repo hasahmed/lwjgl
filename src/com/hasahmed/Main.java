@@ -6,6 +6,8 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.system.*;
 import org.lwjgl.opengl.*;
 
+import org.joml.*;
+
 import java.nio.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
@@ -27,6 +29,7 @@ public class Main {
             1f, 0.5f, 0f, //lower right
             0f, 1f, 0f // top
     };
+    private Matrix3d m;
 
     private float squareVerts[] = {
             -0.5f, -0.5f, 0f, //lower left,
@@ -34,8 +37,8 @@ public class Main {
             -0.5f, 0.5f, 0f, // top
 
             -0.5f, 0.5f, 0f, //upper left
-            0.5f, -0.5f, 0f,
-            0.5f, 0.5f, 0f
+            0.5f, -0.5f, 0f, //lower right
+            0.5f, 0.5f, 0f //top
 
     };
 
@@ -128,13 +131,14 @@ public class Main {
         GL11.glClearColor(0f, 1f, 1f, 1f);
 
 
-        //THE VAO
-        int vertextArrayID = GL30.glGenVertexArrays();
+        //THE VAO: Vertex Array Object
+        // VAO: Stores all the state needed to supply vertex data to the GPU
+        int vertextArrayID = GL30.glGenVertexArrays(); // creation of VAO
         GL30.glBindVertexArray(vertextArrayID);
 
-        int[] vertexArrayIDs = new int[4];
-        GL30.glGenVertexArrays(vertexArrayIDs);
-        System.out.println(java.util.Arrays.toString(vertexArrayIDs));
+//        int[] vertexArrayIDs = new int[4];
+//        GL30.glGenVertexArrays(vertexArrayIDs);
+//        System.out.println(java.util.Arrays.toString(vertexArrayIDs));
 
 
         //loading square into buffer
@@ -144,9 +148,9 @@ public class Main {
 
 
         // loading triangle into buffer
-        triangleVertexBuffer = GL15.glGenBuffers();
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, triangleVertexBuffer);
-        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, triangleVerts, GL15.GL_STATIC_DRAW);
+//        triangleVertexBuffer = GL15.glGenBuffers();
+//        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, triangleVertexBuffer);
+//        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, triangleVerts, GL15.GL_STATIC_DRAW);
 
 
 
@@ -183,19 +187,17 @@ public class Main {
 
             //square attribute array creation
             GL20.glEnableVertexAttribArray(0);
-            GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, squareVertexBuffer);
             GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
 
 
             //triangle attribute array creation
             GL20.glEnableVertexAttribArray(1);
-            GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, triangleVertexBuffer);
             GL20.glVertexAttribPointer(1, 3, GL11.GL_FLOAT, false, 0, 0);
 
 
 
             GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, squareVerts.length / 3);
-            GL11.glDrawArrays(GL11.GL_TRIANGLES, 1, triangleVerts.length / 3);
+//            GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, triangleVerts.length / 3);
 
             GL20.glDisableVertexAttribArray(0);
             GL20.glDisableVertexAttribArray(1);
