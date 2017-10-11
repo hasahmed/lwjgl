@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a171044b-1487-486d-92f4-06fa62bea95c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shaders/test.frag" afterPath="$PROJECT_DIR$/shaders/test.frag" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/hasahmed/GLUtil.java" afterPath="$PROJECT_DIR$/src/com/hasahmed/GLUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/hasahmed/Main.java" afterPath="$PROJECT_DIR$/src/com/hasahmed/Main.java" />
     </list>
     <ignored path="lwjgl-test.iws" />
@@ -59,8 +57,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/hasahmed/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="221" column="46" selection-start-line="221" selection-start-column="46" selection-end-line="221" selection-end-column="46" />
+            <state relative-caret-position="285">
+              <caret line="79" column="68" selection-start-line="79" selection-start-column="68" selection-end-line="79" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1246#1247#0" expanded="true" />
@@ -686,8 +684,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hasahmed/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="221" column="46" selection-start-line="221" selection-start-column="46" selection-end-line="221" selection-end-column="46" />
+        <state relative-caret-position="285">
+          <caret line="79" column="68" selection-start-line="79" selection-start-column="68" selection-end-line="79" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1246#1247#0" expanded="true" />

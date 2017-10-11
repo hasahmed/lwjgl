@@ -76,8 +76,8 @@ public class Main {
 
     private void createWindow(){
 
-        squareVerts = GLUtil.makeSquare(10, 10, 200);
-        System.out.println(java.util.Arrays.toString(squareVerts));
+        squareVerts = GLUtil.makeSquare(10, 10, 20);
+//        System.out.println(java.util.Arrays.toString(squareVerts));
         // Setup an error callback. The default implementation
         // will print the error message in System.err.
         GLFWErrorCallback.createPrint(System.err).set();
@@ -90,8 +90,8 @@ public class Main {
         glfwDefaultWindowHints(); // optional, the current window hints are already the default
         glfwWindowHint(GLFW_SAMPLES, 4); //antialiasing
         glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE); // the window will stay hidden after creation
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
-//        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will not be resizable
+//        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will not be resizable
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -219,7 +219,7 @@ public class Main {
 
             glfwSwapBuffers(window);
 
-            GLUtil.translate(squareVerts, 10, -10);
+            //GLUtil.translate(squareVerts, 10, -10);
         }
     }
 
