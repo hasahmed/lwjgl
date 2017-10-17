@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a171044b-1487-486d-92f4-06fa62bea95c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/lwjgl-test/com/hasahmed/GLUtil.class" afterPath="$PROJECT_DIR$/out/production/lwjgl-test/com/hasahmed/GLUtil.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/lwjgl-test/com/hasahmed/Main.class" afterPath="$PROJECT_DIR$/out/production/lwjgl-test/com/hasahmed/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/hasahmed/GLUtil.java" afterPath="$PROJECT_DIR$/src/com/hasahmed/GLUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/hasahmed/Main.java" afterPath="$PROJECT_DIR$/src/com/hasahmed/Main.java" />
     </list>
     <ignored path="lwjgl-test.iws" />
     <ignored path=".idea/workspace.xml" />
