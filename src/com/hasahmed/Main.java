@@ -19,7 +19,9 @@ public class Main {
     private long window; //window handle
     private int progHandle; //the handle to the shader program
     private int squareVertexBuffer;
-    private int triangleVertexBuffer;
+    private int trinagleVertexBuffer;
+    private int vertextArrayID;
+
 
     private final int viewWidth = 800;
     private final int viewHeight = 600;
@@ -28,7 +30,7 @@ public class Main {
     private float triangleVerts[] = {
             0f, 0.5f, 0f, //lower left,
             1f, 0.5f, 0f, //lower right
-            0f, 1f, 0f // top
+            0f, 1f, 0f // left
     };
 
     private float squareVerts[] = {
@@ -39,12 +41,6 @@ public class Main {
             -0.5f, 0.5f, 0f, //top left
             0.5f, -0.5f, 0f, //lower right
             0.5f, 0.5f, 0f, //top
-
-            //triangle starts here
-//            0f, 0.5f, 0f, //lower left,
-//            1f, 0.5f, 0f, //lower right
-//            0f, 1f, 0f, // top
-
     };
 
     int getViewWidth(){
@@ -74,9 +70,14 @@ public class Main {
 
     }
 
+    float[] smallSquareVerts;
+
     private void createWindow(){
 
-        squareVerts = GLUtil.makeSquare(10, 10, 20);
+        squareVerts = GLUtil.makeSquare(0, 0, 40);
+
+
+        smallSquareVerts = GLUtil.makeSquare(200, 10, 100);
 //        System.out.println(java.util.Arrays.toString(squareVerts));
         // Setup an error callback. The default implementation
         // will print the error message in System.err.
@@ -141,12 +142,6 @@ public class Main {
     }
 
     private void init() {
-
-
-//        squareVerts = GLUtil.arrayAppend(squareVerts, GLUtil.makeCircle(0.5f, 0.5f, 0.3f, 20));
-//        System.out.println(java.util.Arrays.toString(squareVerts));
-//        squareVerts =  GLUtil.makeCircle(0.5f, 0.5f, 0.3f, 4);
-
         //call first
         GL.createCapabilities();
         GL11.glClearColor(0f, 1f, 1f, 1f);
@@ -157,20 +152,12 @@ public class Main {
         int vertextArrayID = GL30.glGenVertexArrays(); // creation of VAO
         GL30.glBindVertexArray(vertextArrayID);
 
-//        int[] vertexArrayIDs = new int[4];
-//        GL30.glGenVertexArrays(vertexArrayIDs);
-//        System.out.println(java.util.Arrays.toString(vertexArrayIDs));
+        int triangleVertexArrayID = GL30.glGenVertexArrays(); //VAO for triangle
+        trinagleVertexBuffer = GL15.glGenBuffers();
 
 
         //loading square into buffer
-        squareVertexBuffer = GL15.glGenBuffers();
-
-
-        // loading triangle into buffer
-        triangleVertexBuffer = GL15.glGenBuffers();
-
-
-
+        squareVertexBuffer = GL15.glGenBuffers(); //generate buffers to hold the square
 
         //<<<<<<<<<<<<SHADERS>>>>>>>>>>>>>>
         String[] shaderBufferArr = GLUtil.readinShaders("test.frag", "test.vert"); //read shaders into string array
@@ -194,32 +181,55 @@ public class Main {
 
         GL20.glDeleteShader(vertShaderID);
         GL20.glDeleteShader(fragShaderID);
+
+        GL20.glUseProgram(progHandle);
+        //END <<SHADERS>>
     }
 
 
+
+
+    private void drawSquares(){
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, squareVertexBuffer);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, squareVerts, GL15.GL_STATIC_DRAW);
+
+
+        //square attribute array creation
+        GL20.glEnableVertexAttribArray(0);
+        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+
+        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, squareVerts.length / 3);
+
+        GL20.glDisableVertexAttribArray(0);
+        GLUtil.translate(squareVerts, 1, -1);
+
+
+    }
+    private void drawTriangles() {
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, trinagleVertexBuffer);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, triangleVerts, GL15.GL_STATIC_DRAW);
+
+        //square attribute array creation
+        GL20.glEnableVertexAttribArray(0);
+        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+
+        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, triangleVerts.length / 3);
+
+
+        GL20.glDisableVertexAttribArray(0);
+        GLUtil.translate(triangleVerts, -1, -1);
+    }
+
     private void loop() {
+
         while ( !glfwWindowShouldClose(window) ) {
-            glfwPollEvents(); //for key handling
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-            GL20.glUseProgram(progHandle);
+            glfwPollEvents(); //for key handling
 
 
-            GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, squareVertexBuffer);
-            GL15.glBufferData(GL15.GL_ARRAY_BUFFER, squareVerts, GL15.GL_STATIC_DRAW);
-
-            //square attribute array creation
-            GL20.glEnableVertexAttribArray(0);
-            GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
-
-            GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, squareVerts.length / 3);
-
-            GL20.glDisableVertexAttribArray(0);
-
-
-
+            drawSquares();
+            drawTriangles();
             glfwSwapBuffers(window);
-
-            //GLUtil.translate(squareVerts, 10, -10);
         }
     }
 

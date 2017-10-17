@@ -11,8 +11,8 @@ import java.nio.file.Paths;
 import java.io.IOException;
 
 public class GLUtil {
-    static float horPixelStep = 1f / 800f;
-    static float vertPixelStep = 1f / 600f;
+    static float horPixelStep = 2f / 800f;
+    static float vertPixelStep = 2f / 600f;
 
     static String readFile(String path, Charset encoding){
         Path currentDir = Paths.get("shaders");
@@ -70,10 +70,12 @@ public class GLUtil {
 
 
     static float[] makeSquare(int screenx, int screeny, int size) {
-        float x = -1 + (float)screenx * horPixelStep;
-        float y = 1 - (float)screeny * vertPixelStep;
+        float x = -1f + ((float)screenx * horPixelStep);
+        float y = 1f - ((float)screeny * vertPixelStep);
         float xsize = (float)size * horPixelStep;
         float ysize = (float)size * vertPixelStep;
+        System.out.printf("horPixelStep: %f\nverPixelStep: %f\n\n", horPixelStep, vertPixelStep);
+        System.out.printf("x: %f\ny: %f\nxsize: %f\nysize%f\n", x, y, xsize, ysize);
         float squareVerts[] = {
                 // triangle 1
                 x,              y - ysize,   0f, //lower left,
