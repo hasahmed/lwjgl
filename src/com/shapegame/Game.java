@@ -1,4 +1,4 @@
-package com.hasahmed; /**
+package com.shapegame; /**
  * Created by Hasan Y Ahmed on 10/7/17.
  */
 
@@ -13,7 +13,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-public class Main {
+public class Game {
 
 
     private long window; //window handle
@@ -234,7 +234,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        new Main().run();
+        new Game().run();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.hasahmed;
+package com.shapegame;
 
 /**
  * Created by Hasan Y Ahmed on 10/9/17.
