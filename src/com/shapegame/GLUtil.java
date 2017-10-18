@@ -4,6 +4,7 @@ package com.shapegame;
  * Created by Hasan Y Ahmed on 10/9/17.
  */
 
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,8 +34,23 @@ public class GLUtil {
         if (fragmentShaderBuffer != null && vertexShaderBuffer != null) {
             String[] shaderArr = {fragmentShaderBuffer, vertexShaderBuffer};
             return shaderArr;
+        } else { //assume engine is jar-ed, and read in shader that way
+            //InputStream frag = getClass().getResourceAsStream() //reading shader in from inside a jar is the task
+            System.out.println("Shader could not be loaded. Using Default Shaders");
+            fragmentShaderBuffer = "#version 330 core\n" +
+                                    "out vec3 color;\n" +
+                                    "void main(){\n" +
+                                        "color = vec3(1, 1, 0);\n" +
+                                    "}";
+            vertexShaderBuffer = "#version 330 core\n" +
+                    "layout(location=0) in vec3 vert;\n" +
+                    "void main(){\n" +
+                    "    gl_Position.xyz = vert;\n" +
+                    "    gl_Position.w = 1.0;\n" +
+                    "}";
+            String[] shaderArr = {fragmentShaderBuffer, vertexShaderBuffer};
+            return shaderArr;
         }
-        throw new UnsupportedOperationException("There was a problem reading in the shaders");
     }
 
     static float[] makeCircle(float cx, float cy, float r, int num_segments){

@@ -1,0 +1,36 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="shapegame:jar">
+    <output-path>$USER_HOME$/lib/shapegame</output-path>
+    <root id="archive" name="shapegame.jar">
+      <element id="module-output" name="shapegame" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/joml-1.9.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-assimp.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-bgfx.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-egl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-glfw.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-jawt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-jemalloc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-lmdb.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-nanovg.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-nfd.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-nuklear.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-openal.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-opencl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-opengl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-opengles.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-openvr.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-par.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-rpmalloc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-sse.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-stb.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-tinyexr.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-tinyfd.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-vulkan.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-xxhash.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl-yoga.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/lwjglx-debug-1.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/lib/lwjgl-3.1.3/classes/steamworks4j-1.6.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
