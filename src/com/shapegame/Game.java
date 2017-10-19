@@ -79,7 +79,6 @@ public class Game {
 
 
         smallSquareVerts = GLUtil.makeSquare(200, 10, 100);
-//        System.out.println(java.util.Arrays.toString(squareVerts));
         // Setup an error callback. The default implementation
         // will print the error message in System.err.
         GLFWErrorCallback.createPrint(System.err).set();
@@ -225,7 +224,7 @@ public class Game {
     private void loop() {
         float r, g, b;
         r = 1f;
-        g = 0f;
+        g = 1f;
         b = 0f;
 
         while ( !glfwWindowShouldClose(window) ) {

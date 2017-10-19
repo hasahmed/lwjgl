@@ -49,45 +49,6 @@ public class GLUtil {
     static String[] readinShaders(String fragShader, String vertShader) {
         String fragmentShaderBuffer = getRuntimeShaderString(fragShader);
         String vertexShaderBuffer = getRuntimeShaderString(vertShader);
-//        String fragmentShaderBuffer = readFile(fragShader, Charset.defaultCharset());
-//        String vertexShaderBuffer = readFile(vertShader, Charset.defaultCharset());
-//
-//        if (fragmentShaderBuffer != null && vertexShaderBuffer != null) {
-//            String[] shaderArr = {fragmentShaderBuffer, vertexShaderBuffer};
-//            return shaderArr;
-//        } else { //assume engine is jar-ed, and read in shader that way
-//            fragmentShaderBuffer = getRuntimeShaderString(fragShader);
-//            vertexShaderBuffer = getRuntimeShaderString(vertShader);
-
-        //InputStream frag = getClass().getResourceAsStream() //reading shader in from inside a jar is the task
-//            System.out.println("Shader could not be loaded. Using Default Shaders");
-//            ClassLoader loader = GLUtil.class.getClassLoader();
-//            System.out.println(loader.getResource("com/shapegame/GLUtil.class"));
-//            System.out.println(loader.getResource("shaders/test.frag"));
-
-//
-//            byte[] frshade = new byte[5000];
-//            InputStream fragStream =
-//                    ClassLoader
-//                    .getSystemClassLoader()
-//                    .getResourceAsStream("shaders/test.frag");
-//            try {
-//                System.out.println(fragStream.read(frshade));
-//                System.out.println(new String(frshade, Charset.defaultCharset()));
-//            } catch (IOException e){
-//                System.out.println("there has been an exception");
-//            }
-//            fragmentShaderBuffer = "#version 330 core\n" +
-//                                    "out vec3 color;\n" +
-//                                    "void main(){\n" +
-//                                        "color = vec3(1, 1, 0);\n" +
-//                                    "}";
-//            vertexShaderBuffer = "#version 330 core\n" +
-//                    "layout(location=0) in vec3 vert;\n" +
-//                    "void main(){\n" +
-//                    "    gl_Position.xyz = vert;\n" +
-//                    "    gl_Position.w = 1.0;\n" +
-//                    "}";
         if (fragmentShaderBuffer == null || vertexShaderBuffer == null){
             System.out.println("Error in reading in of shaders. CHECK SPELLING. Using default shaders");
             fragmentShaderBuffer =
@@ -105,8 +66,7 @@ public class GLUtil {
                             "    gl_Position.w = 1.0;\n" +
                             "}";
         }
-        String[] shaderArr = {fragmentShaderBuffer, vertexShaderBuffer};
-        return shaderArr;
+        return new String[]{fragmentShaderBuffer, vertexShaderBuffer};
     }
 
     static float[] makeCircle(float cx, float cy, float r, int num_segments){
@@ -146,8 +106,6 @@ public class GLUtil {
         float y = 1f - ((float)screeny * vertPixelStep);
         float xsize = (float)size * horPixelStep;
         float ysize = (float)size * vertPixelStep;
-        System.out.printf("horPixelStep: %f\nverPixelStep: %f\n\n", horPixelStep, vertPixelStep);
-        System.out.printf("x: %f\ny: %f\nxsize: %f\nysize%f\n", x, y, xsize, ysize);
         float squareVerts[] = {
                 // triangle 1
                 x,              y - ysize,   0f, //lower left,
