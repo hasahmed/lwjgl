@@ -4,6 +4,7 @@ package com.shapegame;
  * Created by Hasan Y Ahmed on 10/9/17.
  */
 
+import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -27,30 +28,85 @@ public class GLUtil {
         }
         return null;
     }
-    static String[] readinShaders(String fragShader, String vertShader) {
-        String fragmentShaderBuffer = readFile(fragShader, Charset.defaultCharset());
-        String vertexShaderBuffer = readFile(vertShader, Charset.defaultCharset());
 
-        if (fragmentShaderBuffer != null && vertexShaderBuffer != null) {
-            String[] shaderArr = {fragmentShaderBuffer, vertexShaderBuffer};
-            return shaderArr;
-        } else { //assume engine is jar-ed, and read in shader that way
-            //InputStream frag = getClass().getResourceAsStream() //reading shader in from inside a jar is the task
-            System.out.println("Shader could not be loaded. Using Default Shaders");
-            fragmentShaderBuffer = "#version 330 core\n" +
-                                    "out vec3 color;\n" +
-                                    "void main(){\n" +
-                                        "color = vec3(1, 1, 0);\n" +
-                                    "}";
-            vertexShaderBuffer = "#version 330 core\n" +
-                    "layout(location=0) in vec3 vert;\n" +
-                    "void main(){\n" +
-                    "    gl_Position.xyz = vert;\n" +
-                    "    gl_Position.w = 1.0;\n" +
-                    "}";
-            String[] shaderArr = {fragmentShaderBuffer, vertexShaderBuffer};
-            return shaderArr;
+
+    static String getRuntimeShaderString(String shaderFileName){
+        InputStream fragStream = ClassLoader.getSystemClassLoader().getResourceAsStream("shaders/" + shaderFileName);
+        if (fragStream == null) //the reading in of the shader has gone wrong. Will default to default shaders
+            return null;
+
+
+        byte[] frShadeByteBuffer;
+        try {
+            frShadeByteBuffer = new byte[fragStream.available()];
+            fragStream.read(frShadeByteBuffer);
+        } catch(IOException e){
+            return null;
         }
+        return new String(frShadeByteBuffer, Charset.defaultCharset());
+    }
+
+    static String[] readinShaders(String fragShader, String vertShader) {
+        String fragmentShaderBuffer = getRuntimeShaderString(fragShader);
+        String vertexShaderBuffer = getRuntimeShaderString(vertShader);
+//        String fragmentShaderBuffer = readFile(fragShader, Charset.defaultCharset());
+//        String vertexShaderBuffer = readFile(vertShader, Charset.defaultCharset());
+//
+//        if (fragmentShaderBuffer != null && vertexShaderBuffer != null) {
+//            String[] shaderArr = {fragmentShaderBuffer, vertexShaderBuffer};
+//            return shaderArr;
+//        } else { //assume engine is jar-ed, and read in shader that way
+//            fragmentShaderBuffer = getRuntimeShaderString(fragShader);
+//            vertexShaderBuffer = getRuntimeShaderString(vertShader);
+
+        //InputStream frag = getClass().getResourceAsStream() //reading shader in from inside a jar is the task
+//            System.out.println("Shader could not be loaded. Using Default Shaders");
+//            ClassLoader loader = GLUtil.class.getClassLoader();
+//            System.out.println(loader.getResource("com/shapegame/GLUtil.class"));
+//            System.out.println(loader.getResource("shaders/test.frag"));
+
+//
+//            byte[] frshade = new byte[5000];
+//            InputStream fragStream =
+//                    ClassLoader
+//                    .getSystemClassLoader()
+//                    .getResourceAsStream("shaders/test.frag");
+//            try {
+//                System.out.println(fragStream.read(frshade));
+//                System.out.println(new String(frshade, Charset.defaultCharset()));
+//            } catch (IOException e){
+//                System.out.println("there has been an exception");
+//            }
+//            fragmentShaderBuffer = "#version 330 core\n" +
+//                                    "out vec3 color;\n" +
+//                                    "void main(){\n" +
+//                                        "color = vec3(1, 1, 0);\n" +
+//                                    "}";
+//            vertexShaderBuffer = "#version 330 core\n" +
+//                    "layout(location=0) in vec3 vert;\n" +
+//                    "void main(){\n" +
+//                    "    gl_Position.xyz = vert;\n" +
+//                    "    gl_Position.w = 1.0;\n" +
+//                    "}";
+        if (fragmentShaderBuffer == null || vertexShaderBuffer == null){
+            System.out.println("Error in reading in of shaders. CHECK SPELLING. Using default shaders");
+            fragmentShaderBuffer =
+                    "#version 330 core\n" +
+                            "out vec3 color;\n" +
+                            "uniform vec3 incolor;\n" +
+                            "void main(){\n" +
+                            "    color = incolor;\n" +
+                            "}";
+            vertexShaderBuffer =
+                    "#version 330 core\n" +
+                            "layout(location=0) in vec3 vert;\n" +
+                            "void main(){\n" +
+                            "    gl_Position.xyz = vert;\n" +
+                            "    gl_Position.w = 1.0;\n" +
+                            "}";
+        }
+        String[] shaderArr = {fragmentShaderBuffer, vertexShaderBuffer};
+        return shaderArr;
     }
 
     static float[] makeCircle(float cx, float cy, float r, int num_segments){

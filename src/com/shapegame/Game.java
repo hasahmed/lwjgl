@@ -7,6 +7,7 @@ import org.lwjgl.system.*;
 import org.lwjgl.opengl.*;
 
 import java.nio.*;
+import java.util.Random;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -189,7 +190,8 @@ public class Game {
 
 
 
-    private void drawSquares(){
+    private void drawSquares(float r, float g, float b){
+        GL20.glUniform3fv(GL20.glGetUniformLocation(progHandle, "incolor"), new float[]{r, g, b});
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, squareVertexBuffer);
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, squareVerts, GL15.GL_STATIC_DRAW);
 
@@ -221,13 +223,15 @@ public class Game {
     }
 
     private void loop() {
+        float r, g, b;
+        r = 1f;
+        g = 0f;
+        b = 0f;
 
         while ( !glfwWindowShouldClose(window) ) {
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
             glfwPollEvents(); //for key handling
-
-
-            drawSquares();
+            drawSquares(r, g, b);
             drawTriangles();
             glfwSwapBuffers(window);
         }
