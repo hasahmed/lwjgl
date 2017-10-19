@@ -7,7 +7,6 @@ import org.lwjgl.system.*;
 import org.lwjgl.opengl.*;
 
 import java.nio.*;
-import java.util.Random;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -216,7 +215,6 @@ public class Game {
 
         GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, triangleVerts.length / 3);
 
-
         GL20.glDisableVertexAttribArray(0);
         GLUtil.translate(triangleVerts, -1, -1);
     }
@@ -225,7 +223,7 @@ public class Game {
         float r, g, b;
         r = 1f;
         g = 1f;
-        b = 0f;
+        b = 1f;
 
         while ( !glfwWindowShouldClose(window) ) {
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
