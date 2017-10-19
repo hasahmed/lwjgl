@@ -7,12 +7,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="56c86d0b-92c3-4454-92b1-bd1e0620f89e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shapegame/shaders/test.frag" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/shaders/test.vert" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/lwjgl-test/com/hasahmed/GLUtil.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/lwjgl-test/com/hasahmed/HelloWorld.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/lwjgl-test/com/hasahmed/Main.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/shaders/milk.txt" afterPath="" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/shaders/test.frag" afterPath="$PROJECT_DIR$/src/shaders/test.frag" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/shaders/test.vert" afterPath="$PROJECT_DIR$/src/shaders/test.vert" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/shaders/test.vert" afterPath="$PROJECT_DIR$/out/production/shapegame/shaders/test.vert" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/GLUtil.class" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/GLUtil.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/Game.class" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/Game.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
