@@ -2,18 +2,10 @@ package com.shapegame; /**
  * Created by Hasan Y Ahmed on 10/7/17.
  */
 
-import org.lwjgl.glfw.*;
-import org.lwjgl.system.*;
 import org.lwjgl.opengl.*;
-
-import java.nio.*;
-
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
-
-public class Game {
+public abstract class App {
 
 
     private long window; //window handle
@@ -21,11 +13,6 @@ public class Game {
     private int squareVertexBuffer;
     private int trinagleVertexBuffer;
 
-    private float triangleVerts[] = {
-            0f, 0.5f, 0f, //lower left,
-            1f, 0.5f, 0f, //lower right
-            0f, 1f, 0f // left
-    };
 
     private float squareVerts[];
     float[] smallSquareVerts;
@@ -45,79 +32,13 @@ public class Game {
         init();
         loop();
         teardown();
-
     }
 
 
     private void createWindow(){
         Window w = new Window(800, 600);
         this.window = w.getWindow();
-        System.out.println(this.window);
-//
         squareVerts = GLUtil.makeSquare(0, 0, 40);
-//
-//
-//        smallSquareVerts = GLUtil.makeSquare(200, 10, 100);
-//        // Setup an error callback. The default implementation
-//        // will print the error message in System.err.
-//        GLFWErrorCallback.createPrint(System.err).set();
-//
-//        // Initialize GLFW. Most GLFW functions will not work before doing this.
-//        if ( !glfwInit() )
-//            throw new IllegalStateException("Unable to initialize GLFW");
-//
-//        // Configure GLFW
-//        glfwDefaultWindowHints(); // optional, the current window hints are already the default
-//        glfwWindowHint(GLFW_SAMPLES, 4); //antialiasing
-//        glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE); // the window will stay hidden after creation
-////        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
-//        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will not be resizable
-//
-//        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-//        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-//        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL11.GL_TRUE);
-//        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-//
-//        // Create the window
-//        window = glfwCreateWindow(viewWidth, viewHeight, "Hello World!", NULL, NULL);
-//        if ( window == NULL )
-//            throw new RuntimeException("Failed to create the GLFW window");
-//
-//        // Setup a key callback. It will be called every time a key is pressed, repeated or released.
-//        glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
-//            if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-//                glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
-//
-//            if (key == GLFW_KEY_A){
-//                System.out.println("A");
-//            }
-//        });
-//
-//        // Get the thread stack and push a new frame
-//        try ( MemoryStack stack = stackPush() ) {
-//            IntBuffer pWidth = stack.mallocInt(1); // int*
-//            IntBuffer pHeight = stack.mallocInt(1); // int*
-//
-//            // Get the window size passed to glfwCreateWindow
-//            glfwGetWindowSize(window, pWidth, pHeight);
-//
-//            // Get the resolution of the primary monitor
-//            GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-//
-//            // Center the window
-//            glfwSetWindowPos(
-//                    window,
-//                    (vidmode.width() - pWidth.get(0)) / 2,
-//                    (vidmode.height() - pHeight.get(0)) / 2
-//            );
-//        } // the stack frame is popped automatically
-//
-//        // Make the OpenGL context current
-//        glfwMakeContextCurrent(window);
-//        // Enable v-sync
-//        glfwSwapInterval(1);
-//        // Make the window visible
-//        glfwShowWindow(window);
     }
 
     private void init() {
@@ -187,22 +108,22 @@ public class Game {
     }
     private void drawTriangles() {
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, trinagleVertexBuffer);
-        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, triangleVerts, GL15.GL_STATIC_DRAW);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, GLUtil.Constants.triangleVerts, GL15.GL_STATIC_DRAW);
 
         //square attribute array creation
         GL20.glEnableVertexAttribArray(0);
         GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
 
-        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, triangleVerts.length / 3);
+        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, GLUtil.Constants.triangleVerts.length / 3);
 
         GL20.glDisableVertexAttribArray(0);
-        GLUtil.translate(triangleVerts, -1, -1);
+        GLUtil.translate(GLUtil.Constants.triangleVerts, -1, -1);
     }
 
     private void loop() {
         float r, g, b;
         r = 1f;
-        g = 1f;
+        g = 0f;
         b = 1f;
 
         while ( !glfwWindowShouldClose(window) ) {
@@ -213,10 +134,4 @@ public class Game {
             glfwSwapBuffers(window);
         }
     }
-
-    public static void main(String[] args) {
-        new Game().run();
-//        new Game().createWindow();
-    }
-
 }

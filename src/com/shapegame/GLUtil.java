@@ -120,14 +120,22 @@ public class GLUtil {
         return squareVerts;
     }
 
-    static void translate(float[] square, int x, int y){
+    static void translate(float[] verts, int x, int y){
         float realx = x * horPixelStep;
         float realy = y * vertPixelStep;
-        for(int i = 0; i < square.length; i += 3){
-            square[i] += realx;
-            square[i + 1] += realy;
+        for(int i = 0; i < verts.length; i += 3){
+            verts[i] += realx;
+            verts[i + 1] += realy;
         }
 
+    }
+
+    static class Constants{
+        static float triangleVerts[] = {
+                0f, 0.5f, 0f, //lower left,
+                1f, 0.5f, 0f, //lower right
+                0f, 1f, 0f // left
+        };
     }
 
 

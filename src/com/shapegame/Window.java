@@ -16,8 +16,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class Window {
    private long window;
+   private int width, height;
+
+
+   public int getWidth(){
+      return this.width;
+   }
+
+   public int getHeight(){
+       return this.height;
+   }
 
    Window(int width, int height){
+      this.width = width;
+      this.height = height;
       // Setup an error callback. The default implementation
       // will print the error message in System.err.
       GLFWErrorCallback.createPrint(System.err).set();
@@ -47,6 +59,8 @@ public class Window {
       glfwSetKeyCallback(this.window, (window, key, scancode, action, mods) -> {
          if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
             glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
+         if (key == GLFW_KEY_A)
+            System.out.println("Hello Sir, you have pressed A");
       });
 
       // Get the thread stack and push a new frame
