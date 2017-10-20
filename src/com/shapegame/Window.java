@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 
 public class Window {
-   long window;
+   private long window;
 
    Window(int width, int height){
       // Setup an error callback. The default implementation
