@@ -7,24 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="56c86d0b-92c3-4454-92b1-bd1e0620f89e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shape-snake/com/shapesnake/Main.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/App.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/GLUtil$Constants.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/GLUtil.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/Window.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shape-snake/shape-snake.iml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/com/shapegame/GLUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/com/shapegame/Game.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/com/shapegame/Window.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/shaders/test.frag" afterPath="$PROJECT_DIR$/out/production/shapegame/shaders/test.frag" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/shaders/test.vert" afterPath="$PROJECT_DIR$/out/production/shapegame/shaders/test.vert" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/shapegame/Game.java" afterPath="$PROJECT_DIR$/src/com/shapegame/App.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../shape-snake/src/com/shapesnake/Main.java" afterPath="$PROJECT_DIR$/../shape-snake/src/com/shapesnake/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shapegame.iml" afterPath="$PROJECT_DIR$/shapegame.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shapegame/GLUtil.java" afterPath="$PROJECT_DIR$/src/com/shapegame/GLUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shapegame/Window.java" afterPath="$PROJECT_DIR$/src/com/shapegame/Window.java" />
     </list>
     <ignored path="shapegame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,8 +31,8 @@
       <file leaf-file-name="App.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/shapegame/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="225">
+              <caret line="55" column="24" selection-start-line="55" selection-start-column="24" selection-end-line="55" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -123,8 +106,8 @@
         <option value="$PROJECT_DIR$/src/com/shapegame/Game.java" />
         <option value="$PROJECT_DIR$/src/com/shapegame/GLUtil.java" />
         <option value="$PROJECT_DIR$/../shape-snake/src/com/shapesnake/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/shapegame/App.java" />
         <option value="$PROJECT_DIR$/src/com/shapegame/Window.java" />
+        <option value="$PROJECT_DIR$/src/com/shapegame/App.java" />
       </list>
     </option>
   </component>
@@ -645,8 +628,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shapegame/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="225">
+          <caret line="55" column="24" selection-start-line="55" selection-start-column="24" selection-end-line="55" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
