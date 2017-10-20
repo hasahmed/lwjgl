@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="shapegame:jar">
+  <artifact type="jar" build-on-make="true" name="shapegame:jar">
     <output-path>$USER_HOME$/lib/shapegame</output-path>
     <root id="archive" name="shapegame.jar">
       <element id="module-output" name="shapegame" />

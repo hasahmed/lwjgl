@@ -5,7 +5,7 @@ package com.shapegame;
  */
 import org.lwjgl.glfw.*;
 import org.lwjgl.system.*;
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.GL11; //needed for GL11.GL_TRUE
 
 import java.nio.*;
 
@@ -22,7 +22,6 @@ public class Window {
    public int getWidth(){
       return this.width;
    }
-
    public int getHeight(){
        return this.height;
    }
@@ -90,7 +89,7 @@ public class Window {
       glfwShowWindow(this.window);
    }
 
-   public long getWindow() {
+   long getWindow() {
       return window;
    }
 }
