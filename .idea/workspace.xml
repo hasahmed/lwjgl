@@ -7,11 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="56c86d0b-92c3-4454-92b1-bd1e0620f89e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shape-snake/com/shapesnake/Main.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/App.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/GLUtil$Constants.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/GLUtil.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/Window.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/shape-snake/shape-snake.iml" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/com/shapegame/GLUtil.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/com/shapegame/Game.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/com/shapegame/Window.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/shaders/test.frag" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/shaders/test.vert" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/shaders/test.frag" afterPath="$PROJECT_DIR$/out/production/shapegame/shaders/test.frag" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/shaders/test.vert" afterPath="$PROJECT_DIR$/out/production/shapegame/shaders/test.vert" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/shapegame/Game.java" afterPath="$PROJECT_DIR$/src/com/shapegame/App.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../shape-snake/src/com/shapesnake/Main.java" afterPath="$PROJECT_DIR$/../shape-snake/src/com/shapesnake/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
