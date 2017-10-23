@@ -3,14 +3,20 @@ package com.shapegame;
 /**
  * Created by Hasan Y Ahmed on 10/20/17.
  */
+import com.shapegame.shapes.Shape;
 import org.lwjgl.opengl.*;
+
+import java.util.ArrayList;
 
 class GLHandler {
     private int progHandle;
     private int squareVertexBuffer;
     private int trinagleVertexBuffer;
+    private ArrayList<Shape> shapeList;
     private float[] squareVerts;
     GLHandler(){
+        shapeList = new ArrayList<>(1000); //big initial capacity so no need to resize for a long time
+
         initilizeVerts(); //delete later
         //call first
         GL.createCapabilities();
@@ -61,8 +67,11 @@ class GLHandler {
         squareVerts = GLUtil.makeSquare(40, 40, 50);
     }
 
-    void drawTriangles(float r, float g, float b) {
-        GL20.glUniform3fv(GL20.glGetUniformLocation(progHandle, "incolor"), new float[]{r, g, b});
+
+    //void drawShape(DrawAbleShape )
+
+    void drawTriangles(float r, float g, float b, float a) {
+        GL20.glUniform4fv(GL20.glGetUniformLocation(progHandle, "incolor"), new float[]{r, g, b, a});
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, trinagleVertexBuffer);
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, GLUtil.Constants.triangleVerts, GL15.GL_STATIC_DRAW);
 
@@ -76,8 +85,8 @@ class GLHandler {
         GLUtil.translate(GLUtil.Constants.triangleVerts, -1, -1);
     }
 
-    void drawSquares(float r, float g, float b){
-        GL20.glUniform3fv(GL20.glGetUniformLocation(progHandle, "incolor"), new float[]{r, g, b});
+    void drawSquares(float r, float g, float b, float a){
+        GL20.glUniform4fv(GL20.glGetUniformLocation(progHandle, "incolor"), new float[]{r, g, b, a});
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, squareVertexBuffer);
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, squareVerts, GL15.GL_STATIC_DRAW);
 

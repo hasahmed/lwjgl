@@ -127,7 +127,6 @@ public class GLUtil {
             verts[i] += realx;
             verts[i + 1] += realy;
         }
-
     }
 
     static class Constants{
