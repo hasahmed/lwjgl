@@ -1,0 +1,10 @@
+3/12/18:
+
+Have been working on general cleanup. Most recent development making the GLUtil class constructor take the window width
+and height as arguments so that it could generate squares with the correct aspect ratio.
+
+Future plans: Continue cleanup. Seperate GLHandler class from drawing of the current random objects.
+
+
+NOTE***************** THE RUN CONFIGURATION THAT CURRENTLY SAYS "BUILD ARTIFACTS" DOES NOT ACTUALLY BUILD THE ARTIFACTS.
+IN ORDER FOR IT TO DO SO, THE ARTIFCACT THINGY MUST BE SELECTED, THEN THE PENCIL CLICKED, AND THE CHECK MARK PRESSED!!!

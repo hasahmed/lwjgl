@@ -11,11 +11,25 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.IOException;
 
-public class GLUtil {
-    static float horPixelStep = 2f / 800f;
-    static float vertPixelStep = 2f / 600f;
 
-    static String readFile(String path, Charset encoding){
+
+//utility classs to help out with opengl tasks
+public class GLUtil {
+    private float horPixelStep;
+    private float vertPixelStep;
+
+    float triangleVerts[] = { //for testing. Should be able to remove later
+            0f, 0.5f, 0f, //lower left,
+            1f, 0.5f, 0f, //lower right
+            0f, 1f, 0f // left
+    };
+
+    GLUtil(int windowWidth, int windowHeight){
+       this.horPixelStep = 2f / windowWidth;
+        this.vertPixelStep = 2f / windowHeight;
+    }
+
+    String readFile(String path, Charset encoding){
         Path currentDir = Paths.get("shaders");
         currentDir = currentDir.toAbsolutePath();
         Path p = Paths.get(currentDir.toString(), path);
@@ -29,7 +43,7 @@ public class GLUtil {
     }
 
 
-    static String getRuntimeShaderString(String shaderFileName){
+    String getRuntimeShaderString(String shaderFileName){
         InputStream fragStream = ClassLoader.getSystemClassLoader().getResourceAsStream("shaders/" + shaderFileName);
         if (fragStream == null) //the reading in of the shader has gone wrong. Will default to default shaders
             return null;
@@ -45,7 +59,7 @@ public class GLUtil {
         return new String(frShadeByteBuffer, Charset.defaultCharset());
     }
 
-    static String[] readinShaders(String fragShader, String vertShader) {
+    String[] readinShaders(String fragShader, String vertShader) {
         String fragmentShaderBuffer = getRuntimeShaderString(fragShader);
         String vertexShaderBuffer = getRuntimeShaderString(vertShader);
         if (fragmentShaderBuffer == null || vertexShaderBuffer == null){
@@ -68,7 +82,7 @@ public class GLUtil {
         return new String[]{fragmentShaderBuffer, vertexShaderBuffer};
     }
 
-    static float[] makeCircle(float cx, float cy, float r, int num_segments){
+    float[] makeCircle(float cx, float cy, float r, int num_segments){
         float[] f = new float[num_segments * 3];
         for(int ii = 0; ii < num_segments * 3; ii += 3) {
             float theta = 2.0f * 3.1415926f * (float)ii / (float)num_segments;//get the current angle
@@ -85,7 +99,7 @@ public class GLUtil {
     }
 
 
-    static float[] arrayAppend(float[] arr1, float[] arr2){
+    float[] arrayAppend(float[] arr1, float[] arr2){
         float[] ret = new float[arr1.length + arr2.length];
         int i;
         for(i = 0; i < arr1.length; i++)
@@ -100,7 +114,7 @@ public class GLUtil {
     }
 
 
-    static float[] makeSquare(int screenx, int screeny, int size) {
+    float[] makeSquare(int screenx, int screeny, int size) {
         float x = -1f + ((float)screenx * horPixelStep);
         float y = 1f - ((float)screeny * vertPixelStep);
         float xsize = (float)size * horPixelStep;
@@ -120,7 +134,7 @@ public class GLUtil {
         return squareVerts;
     }
 
-    static void translate(float[] verts, int x, int y){
+    void translate(float[] verts, int x, int y){
         float realx = x * horPixelStep;
         float realy = y * vertPixelStep;
         for(int i = 0; i < verts.length; i += 3){
@@ -128,14 +142,5 @@ public class GLUtil {
             verts[i + 1] += realy;
         }
     }
-
-    static class Constants{
-        static float triangleVerts[] = {
-                0f, 0.5f, 0f, //lower left,
-                1f, 0.5f, 0f, //lower right
-                0f, 1f, 0f // left
-        };
-    }
-
 
 }

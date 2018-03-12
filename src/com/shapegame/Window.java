@@ -39,9 +39,9 @@ public class Window {
 
       // Configure GLFW
       glfwDefaultWindowHints(); // optional, the current window hints are already the default
-      glfwWindowHint(GLFW_SAMPLES, 4); //antialiasing
-      glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE); // the window will stay hidden after creation
-//        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
+      glfwWindowHint(GLFW_SAMPLES, 4); //antialiasing, unwanted for pixel games;
+      glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE); // will the window will stay hidden after creation?
+//        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // will the window will be resizable?
       glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will not be resizable
 
       glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -89,7 +89,7 @@ public class Window {
       glfwShowWindow(this.window);
    }
 
-   long getWindow() {
+   long getWindowHandle() {
       return window;
    }
 }

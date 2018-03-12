@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../shape-snake/src/shape-snake.iml" filepath="$PROJECT_DIR$/../shape-snake/src/shape-snake.iml" />
       <module fileurl="file://$PROJECT_DIR$/shapegame.iml" filepath="$PROJECT_DIR$/shapegame.iml" />
     </modules>
   </component>

@@ -7,16 +7,16 @@ import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 public abstract class App {
 
-    abstract int getWindowHeight();
-    abstract int getWindowWidth();
+    public abstract int getWindowHeight();
+    public abstract int getWindowWidth();
 
-    private long window; //window handle
+    private long glfwWindowHandle; //window handle
     private GLHandler glHandler;
 
     private void teardown(){
         // Free the window callbacks and destroy the window
-        glfwFreeCallbacks(this.window);
-        glfwDestroyWindow(this.window);
+        glfwFreeCallbacks(this.glfwWindowHandle);
+        glfwDestroyWindow(this.glfwWindowHandle);
 
         // Terminate GLFW and free the error callback
         glfwTerminate();
@@ -24,13 +24,12 @@ public abstract class App {
     }
 
     public void init(){
-        //createWindow();
         //window creation
         Window w = new Window(this.getWindowWidth(), this.getWindowHeight());
-        this.window = w.getWindow();
+        this.glfwWindowHandle = w.getWindowHandle();
 
         //opengl instance creation
-        this.glHandler = new GLHandler();
+        this.glHandler = new GLHandler(new GLUtil(this.getWindowWidth(), this.getWindowHeight()));
 
         //the loop where the opengl drawing happens
         loop();
@@ -43,14 +42,14 @@ public abstract class App {
         g = 0f;
         b = 0f;
 
-        while ( !glfwWindowShouldClose(window) ) {
+        while ( !glfwWindowShouldClose(glfwWindowHandle) ) {
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-            glfwPollEvents(); //for key handling
+            glfwPollEvents(); //for input handling
             //drawSquares(r, g, b);
             glHandler.drawSquares(r, g, b, 1f);
             glHandler.drawTriangles(0f, 1f, 0f, 0.5f);
             //drawTriangles();
-            glfwSwapBuffers(window);
+            glfwSwapBuffers(glfwWindowHandle);
         }
     }
 }

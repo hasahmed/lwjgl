@@ -1,11 +1,17 @@
 package com.shapegame;
 
-/**
- * Created by Hasan Y Ahmed on 10/20/17.
+/*
+ * Project : shapegame
+ * Package : com.shapegame
+ * Creator : Hasan Yusuf Ahmed
+ * Date    : 3/12/18
  */
 import com.shapegame.shapes.Shape;
 import org.lwjgl.opengl.*;
-//import static org.lwjgl.opengl.*;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL30.*;
 
 import java.util.ArrayList;
 
@@ -15,96 +21,97 @@ class GLHandler {
     private int trinagleVertexBuffer;
     private ArrayList<Shape> shapeList;
     private float[] squareVerts;
-    GLHandler(){
+    private GLUtil glUtilHandle;
+    GLHandler(GLUtil glUtilInstance){
+        this.glUtilHandle = glUtilInstance;
         shapeList = new ArrayList<>(1000); //big initial capacity so no need to resize for a long time
 
         initilizeVerts(); //delete later
         //call first
         GL.createCapabilities();
-        GL11.glClearColor(0f, 1f, 1f, 0.5f);
+        glClearColor(0f, 1f, 1f, 0.5f);
 
         // enable alpha
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
         //THE VAO: Vertex Array Object
         // VAO: Stores all the state needed to supply vertex data to the GPU
-        int vertextArrayID = GL30.glGenVertexArrays(); // creation of VAO
-        GL30.glBindVertexArray(vertextArrayID);
+        int vertextArrayID = glGenVertexArrays(); // creation of VAO
+        glBindVertexArray(vertextArrayID);
 
-        int triangleVertexArrayID = GL30.glGenVertexArrays(); //VAO for triangle
-        trinagleVertexBuffer = GL15.glGenBuffers();
+        int triangleVertexArrayID = glGenVertexArrays(); //VAO for triangle
+        trinagleVertexBuffer = glGenBuffers();
 
 
         //loading square into buffer
-        squareVertexBuffer = GL15.glGenBuffers(); //generate buffers to hold the square
+        squareVertexBuffer = glGenBuffers(); //generate buffers to hold the square
 
         //<<<<<<<<<<<<SHADERS>>>>>>>>>>>>>>
-        String[] shaderBufferArr = GLUtil.readinShaders("test.frag", "test.vert"); //read shaders into string array
-        int vertShaderID = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
-        int fragShaderID = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
-        GL20.glShaderSource(fragShaderID, shaderBufferArr[0]);
-        GL20.glShaderSource(vertShaderID, shaderBufferArr[1]);
+        String[] shaderBufferArr = glUtilHandle.readinShaders("test.frag", "test.vert"); //read shaders into string array
+        int vertShaderID = glCreateShader(GL_VERTEX_SHADER);
+        int fragShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+        glShaderSource(fragShaderID, shaderBufferArr[0]);
+        glShaderSource(vertShaderID, shaderBufferArr[1]);
 
-        GL20.glCompileShader(fragShaderID);
-        GL20.glCompileShader(vertShaderID);
-
-
-        progHandle = GL20.glCreateProgram();
-        GL20.glAttachShader(progHandle, fragShaderID);
-        GL20.glAttachShader(progHandle, vertShaderID);
-        GL20.glLinkProgram(progHandle);
-
-        GL20.glDetachShader(progHandle, vertShaderID);
-        GL20.glDetachShader(progHandle, fragShaderID);
+        glCompileShader(fragShaderID);
+        glCompileShader(vertShaderID);
 
 
-        GL20.glDeleteShader(vertShaderID);
-        GL20.glDeleteShader(fragShaderID);
+        progHandle = glCreateProgram();
+        glAttachShader(progHandle, fragShaderID);
+        glAttachShader(progHandle, vertShaderID);
+        glLinkProgram(progHandle);
 
-        GL20.glUseProgram(progHandle);
+        glDetachShader(progHandle, vertShaderID);
+        glDetachShader(progHandle, fragShaderID);
+
+
+        glDeleteShader(vertShaderID);
+        glDeleteShader(fragShaderID);
+
+        glUseProgram(progHandle);
         //END <<SHADERS>>
 
     }
 
     void initilizeVerts(){
-        squareVerts = GLUtil.makeSquare(40, 40, 50);
+        squareVerts = glUtilHandle.makeSquare(40, 40, 50);
     }
 
 
     //void drawShape(DrawAbleShape )
 
     void drawTriangles(float r, float g, float b, float a) {
-        GL20.glUniform4fv(GL20.glGetUniformLocation(progHandle, "incolor"), new float[]{r, g, b, a});
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, trinagleVertexBuffer);
-        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, GLUtil.Constants.triangleVerts, GL15.GL_STATIC_DRAW);
+        glUniform4fv(glGetUniformLocation(progHandle, "incolor"), new float[]{r, g, b, a});
+        glBindBuffer(GL_ARRAY_BUFFER, trinagleVertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, glUtilHandle.triangleVerts, GL_STATIC_DRAW);
+        glUtilHandle.getRuntimeShaderString("taco");
 
         //square attribute array creation
-        GL20.glEnableVertexAttribArray(0);
-        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
 
-        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, GLUtil.Constants.triangleVerts.length / 3);
+        glDrawArrays(GL_TRIANGLES, 0, glUtilHandle.triangleVerts.length / 3);
 
-        GL20.glDisableVertexAttribArray(0);
-        GLUtil.translate(GLUtil.Constants.triangleVerts, -1, -1);
+        glDisableVertexAttribArray(0);
+        glUtilHandle.translate(glUtilHandle.triangleVerts, -1, -1);
     }
 
     void drawSquares(float r, float g, float b, float a){
-        GL20.glUniform4fv(GL20.glGetUniformLocation(progHandle, "incolor"), new float[]{r, g, b, a});
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, squareVertexBuffer);
-        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, squareVerts, GL15.GL_STATIC_DRAW);
+        glUniform4fv(glGetUniformLocation(progHandle, "incolor"), new float[]{r, g, b, a});
+        glBindBuffer(GL_ARRAY_BUFFER, squareVertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, squareVerts, GL_STATIC_DRAW);
 
 
         //square attribute array creation
-        GL20.glEnableVertexAttribArray(0);
-        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
 
-        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, squareVerts.length / 3);
+        glDrawArrays(GL_TRIANGLES, 0, squareVerts.length / 3);
 
-        GL20.glDisableVertexAttribArray(0);
-        GLUtil.translate(squareVerts, 1, -1);
-
-
+        glDisableVertexAttribArray(0);
+        glUtilHandle.translate(squareVerts, 1, -1);
     }
 }
