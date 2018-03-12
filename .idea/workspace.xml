@@ -6,22 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="56c86d0b-92c3-4454-92b1-bd1e0620f89e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shapegame/ThreadTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/devlog.txt" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/GLUtil$Constants.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/App.class" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/App.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/GLHandler.class" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/GLHandler.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/GLUtil.class" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/GLUtil.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/Window.class" afterPath="$PROJECT_DIR$/out/production/shapegame/com/shapegame/Window.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shapegame/App.java" afterPath="$PROJECT_DIR$/src/com/shapegame/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shapegame/GLHandler.java" afterPath="$PROJECT_DIR$/src/com/shapegame/GLHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shapegame/GLUtil.java" afterPath="$PROJECT_DIR$/src/com/shapegame/GLUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shapegame/Window.java" afterPath="$PROJECT_DIR$/src/com/shapegame/Window.java" />
-    </list>
+    <list default="true" id="56c86d0b-92c3-4454-92b1-bd1e0620f89e" name="Default" comment="" />
     <ignored path="shapegame.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
