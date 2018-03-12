@@ -5,6 +5,7 @@ package com.shapegame;
  */
 import com.shapegame.shapes.Shape;
 import org.lwjgl.opengl.*;
+//import static org.lwjgl.opengl.*;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,11 @@ class GLHandler {
         initilizeVerts(); //delete later
         //call first
         GL.createCapabilities();
-        GL11.glClearColor(0f, 1f, 1f, 1f);
+        GL11.glClearColor(0f, 1f, 1f, 0.5f);
+
+        // enable alpha
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
 
         //THE VAO: Vertex Array Object
