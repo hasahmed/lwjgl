@@ -1,20 +1,19 @@
 3/12/18:
 
-CURRENTLY: Thinking of a way to be able to generate Shapes like new Rectangle(width, height); and have it be properly
-preportioned in relation to the screen size, WITHOUT having to pass in the screen size.
-Possible solution:
-    Rather than having the verticies attatched to the Shape object, have it only store its width and its height, and its
-    shape type (triangle, circle, rectangle), then whenever the drawing happens, the verticies are generated and stored
-    in a table, or an array and accociated to the object by an ID.
 
+CURRENTLY:
+    Just finished seperating shape logic from rendering logic, no arbitrary squares can be added without problem.
 
-
-Have been working on general cleanup. Most recent development making the GLUtil class constructor take the window width
-and height as arguments so that it could generate squares with the correct aspect ratio.
-
-Future plans: Continue cleanup. Seperate GLHandler class from drawing of the current random objects.
-
-
+    To do: Coninue cleanup.
+        add ability to move shapes and stuff.
+        Have way to handle input
+        Have way to change background color
+        Make a general method to generate rectangles instead of just squares.
+        Make a method to generate other shapes too.
+        Colision detection
+        GL code executed on seperate thread
+        Callbacks for various things
+        Consider Hiarchial node structure like godot.
 
 
 
