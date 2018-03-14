@@ -4,6 +4,10 @@ package com.shapegame;
  * Created by Hasan Y Ahmed on 10/9/17.
  */
 
+import com.shapegame.shapes.Shape;
+import com.shapegame.shapes.ShapeType;
+import com.shapegame.shapes.Square;
+
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -18,6 +22,9 @@ public class GLUtil {
     private float horPixelStep;
     private float vertPixelStep;
 
+    private int windowWidth;
+    private int windowHeight;
+
     float triangleVerts[] = { //for testing. Should be able to remove later
             0f, 0.5f, 0f, //lower left,
             1f, 0.5f, 0f, //lower right
@@ -27,6 +34,8 @@ public class GLUtil {
     GLUtil(int windowWidth, int windowHeight){
        this.horPixelStep = 2f / windowWidth;
         this.vertPixelStep = 2f / windowHeight;
+        this.windowHeight = windowHeight;
+        this.windowWidth = windowWidth;
     }
 
     String readFile(String path, Charset encoding){
@@ -113,13 +122,38 @@ public class GLUtil {
         return ret;
     }
 
+    float[] makeVerts(Shape shape) {
+        switch (shape.shapeType) {
+            case SQUARE:
+                return makeSquare(shape.getPosition().getX(), shape.getPosition().getY(), ((Square)shape).getSize());
 
-    float[] makeSquare(int screenx, int screeny, int size) {
-        float x = -1f + ((float)screenx * horPixelStep);
-        float y = 1f - ((float)screeny * vertPixelStep);
+        }
+//        float x = -1f + ((float)screenx * horPixelStep);
+//        float y = 1f - ((float)screeny * vertPixelStep);
+//        float xsize = (float)size * horPixelStep;
+//        float ysize = (float)size * vertPixelStep;
+//        float squareVerts[] = {
+//                // triangle 1
+//                x,              y - ysize,   0f, //lower left,
+//                x + xsize,      y - ysize,   0f, //lower right
+//                x,              y,           0f, // top left
+//
+//
+//                // triangle 2
+//                x,              y,           0f, // top left
+//                x + xsize,      y - ysize,   0f, //lower right
+//                x + xsize,      y,           0f //lower right
+//        };
+        return new float[10];
+    }
+
+
+    float[] makeSquare(float screenx, float screeny, int size) {
+        float x = -1f + (screenx * horPixelStep);
+        float y = 1f - (screeny * vertPixelStep);
         float xsize = (float)size * horPixelStep;
         float ysize = (float)size * vertPixelStep;
-        float squareVerts[] = {
+        return new float[] {
                 // triangle 1
                 x,              y - ysize,   0f, //lower left,
                 x + xsize,      y - ysize,   0f, //lower right
@@ -131,7 +165,6 @@ public class GLUtil {
                 x + xsize,      y - ysize,   0f, //lower right
                 x + xsize,      y,           0f //lower right
         };
-        return squareVerts;
     }
 
     void translate(float[] verts, int x, int y){

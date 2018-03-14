@@ -81,19 +81,31 @@ class GLHandler {
     }
 
 
-    //void drawShape(DrawAbleShape )
-
-    void drawTriangles(float r, float g, float b, float a) {
-        glUniform4fv(glGetUniformLocation(progHandle, "incolor"), new float[]{r, g, b, a});
+    //draws the given shape
+    void drawShape(Shape shape) {
+        glUniform4fv(glGetUniformLocation(progHandle, "incolor"), shape.getColor().getColorArray());
         glBindBuffer(GL_ARRAY_BUFFER, trinagleVertexBuffer);
-        glBufferData(GL_ARRAY_BUFFER, glUtilHandle.triangleVerts, GL_STATIC_DRAW);
-        glUtilHandle.getRuntimeShaderString("taco");
+        glBufferData(GL_ARRAY_BUFFER, shape.getVerts(), GL_STATIC_DRAW);
 
         //square attribute array creation
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
 
-        glDrawArrays(GL_TRIANGLES, 0, glUtilHandle.triangleVerts.length / 3);
+        glDrawArrays(GL_TRIANGLES, 0, shape.getVerts().length);
+
+        glDisableVertexAttribArray(0);
+    }
+
+    void drawTriangles(float r, float g, float b, float a) {
+        glUniform4fv(glGetUniformLocation(progHandle, "incolor"), new float[]{r, g, b, a});
+        glBindBuffer(GL_ARRAY_BUFFER, trinagleVertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, glUtilHandle.triangleVerts, GL_STATIC_DRAW);
+
+        //square attribute array creation
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
+
+        glDrawArrays(GL_TRIANGLES, 0, glUtilHandle.triangleVerts.length);
 
         glDisableVertexAttribArray(0);
         glUtilHandle.translate(glUtilHandle.triangleVerts, -1, -1);
@@ -109,7 +121,7 @@ class GLHandler {
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
 
-        glDrawArrays(GL_TRIANGLES, 0, squareVerts.length / 3);
+        glDrawArrays(GL_TRIANGLES, 0, squareVerts.length);
 
         glDisableVertexAttribArray(0);
         glUtilHandle.translate(squareVerts, 1, -1);

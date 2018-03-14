@@ -1,9 +1,21 @@
 3/12/18:
 
+CURRENTLY: Thinking of a way to be able to generate Shapes like new Rectangle(width, height); and have it be properly
+preportioned in relation to the screen size, WITHOUT having to pass in the screen size.
+Possible solution:
+    Rather than having the verticies attatched to the Shape object, have it only store its width and its height, and its
+    shape type (triangle, circle, rectangle), then whenever the drawing happens, the verticies are generated and stored
+    in a table, or an array and accociated to the object by an ID.
+
+
+
 Have been working on general cleanup. Most recent development making the GLUtil class constructor take the window width
 and height as arguments so that it could generate squares with the correct aspect ratio.
 
 Future plans: Continue cleanup. Seperate GLHandler class from drawing of the current random objects.
+
+
+
 
 
 NOTE***************** THE RUN CONFIGURATION THAT CURRENTLY SAYS "BUILD ARTIFACTS" DOES NOT ACTUALLY BUILD THE ARTIFACTS.
